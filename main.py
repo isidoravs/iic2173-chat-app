@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from datetime import datetime
+from requests import get
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
@@ -8,7 +9,8 @@ socketio = SocketIO(app)
 
 @app.route('/')
 def sessions():
-  return render_template('session.html')
+  return render_template('session.html',
+                         get=get)
 
 def messageReceived(methods=['GET', 'POST']):
   print('SUCCESS! Message received')

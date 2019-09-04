@@ -17,6 +17,7 @@
         <input type="text" class="message message-input" placeholder="Message"/>
         <input type="submit" class="button"/>
       </form>
+      <span>Send 'chucknorris' to get a Chuck Norris fact!</span>
     </div>
   </div>
 
@@ -45,9 +46,16 @@
       console.log( msg )
       if( typeof msg.user_name !== 'undefined' ) {
         $( 'h3' ).text( 'Chat' )
-        $( 'div.message_holder' ).append(
-          '<div class="container"><p><b>'+msg.user_name+':</b> '+msg.message+' </p><span class="time">('+msg.timestamp+')</span></div>'
-        )
+        if( msg.message === 'chucknorris' ) {
+          let chuck_norris = "{{ get('https://api.chucknorris.io/jokes/random').json().value }}"
+          $( 'div.message_holder' ).append(
+            '<div class="container"><p><b>'+msg.user_name+'</b> '+ chuck_norris +' </p><span class="time">'+msg.timestamp+'</span></div>'
+          )
+        } else {
+          $( 'div.message_holder' ).append(
+            '<div class="container"><p><b>'+msg.user_name+'</b> '+msg.message+' </p><span class="time">'+msg.timestamp+'</span></div>'
+          )
+        }
       }
     })
   </script>

@@ -5,9 +5,8 @@
 body {
   margin: 0 auto;
   max-width: 800px;
-  padding: 0 20px;
+  padding: 20px;
   height: 100%;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 p {
@@ -15,13 +14,19 @@ p {
 }
 
 input {
-  height: 20px;
+  height: 30px;
   padding: 2px;
 }
 
 html,
 body {
   height: 100%;
+}
+
+span {
+  font-size: 10px;
+  padding: 5px;
+  color: #ccc;
 }
 
 .bottom-input {
@@ -35,7 +40,7 @@ body {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  height: 25px;
+  height: 30px;
   width: 100px;
   cursor: pointer;
   border-radius: 4px;
@@ -77,4 +82,21 @@ body {
   width: 80%;
   margin-right: 10px;
   margin-left: 5px;
+}
+
+.pagination-page-info {
+  padding: .6em;
+  padding-left: 0;
+  width: 40em;
+  margin: .5em;
+  margin-left: 0;
+  font-size: 12px;
+}
+
+.pagination-page-info b {
+  color: rgb(0, 0, 0);
+  background: #6aa6ed;
+  padding-left: 2px;
+  padding: .1em .25em;
+  font-size: 150%;
 }
