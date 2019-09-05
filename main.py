@@ -17,6 +17,9 @@ def messageReceived(methods=['GET', 'POST']):
 
 @socketio.on('chat_event')
 def handle_my_custom_event(json, methods=['GET', 'POST']):
+  if 'message' in json and json['message'] == 'chucknorris':
+    chuck_norris_joke = get('https://api.chucknorris.io/jokes/random').json()['value']
+    json['message'] = chuck_norris_joke
   print('received event: ' + str(json))
   socketio.emit('chat_response', json, callback=messageReceived)
 
