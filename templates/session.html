@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
   <title>Anonymous chat</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-
   <h3 class='no-message'>No messages yet..</h3>
   <div class="chat-app">
     <div class="content">
-      <div class="message_holder"></div>
+      <ul id="pagination-demo" class="pagination"></ul>
+      <div class="message_holder">
+        <div class="page" id="page1"></div>
+      </div>
     </div>
     <div class="bottom-input">
       <form class= "chat-input" action="" method="POST">
@@ -24,8 +27,11 @@
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+  <script src="https://www.solodev.com/assets/pagination/jquery.twbsPagination.js"></script>
   <script type="text/javascript">
     var socket = io.connect('https://' + document.domain + ':' + location.port);
+    var msg_count = 0;
+    var page = 1;
     socket.on( 'connect', function() {
       socket.emit( 'chat_event', {
         data: 'User Connected'
@@ -45,20 +51,64 @@
     socket.on( 'chat_response', function( msg ) {
       console.log( msg )
       if( typeof msg.user_name !== 'undefined' ) {
-        $( 'h3' ).text( 'Chat' )
-        if( msg.message === 'chucknorris' ) {
-          let chuck_norris = "{{ get('https://api.chucknorris.io/jokes/random').json().value }}"
+        msg_count ++;
+        if( msg_count > 5 ) {
+          page ++;
+          msg_count = 1;
           $( 'div.message_holder' ).append(
-            '<div class="container"><p><b>'+msg.user_name+'</b> '+ chuck_norris +' </p><span class="time">'+msg.timestamp+'</span></div>'
+            '<div class="page" id="page'+page+'"></div>'
           )
-        } else {
-        $( 'div.message_holder' ).append(
+        }
+        $( 'h3' ).text( 'Chat' )
+        $( `#page${page}` ).append(
           '<div class="container"><p><b>'+msg.user_name+'</b> '+msg.message+' </p><span class="time">'+msg.timestamp+'</span></div>'
         )
       }
-      }
     })
-  </script>
 
+    // Pagination https://jsfiddle.net/solodev/yw7y4wez/
+    $('#pagination-demo').twbsPagination({
+    totalPages: 20,
+    // the current page that show on start
+    startPage: 1,
+
+    // maximum visible pages
+    visiblePages: 5,
+
+    initiateStartPageClick: true,
+
+    // template for pagination links
+    href: false,
+
+    // variable name in href template for page number
+    hrefVariable: '{{number}}',
+
+    // Text labels
+    first: 'First',
+    prev: 'Previous',
+    next: 'Next',
+    last: 'Last',
+
+    // carousel-style pagination
+    loop: false,
+
+    // callback function
+    onPageClick: function (event, page) {
+      $('.page-active').removeClass('page-active');
+      $('#page'+page).addClass('page-active');
+    },
+
+    // pagination Classes
+    paginationClass: 'pagination',
+    nextClass: 'next',
+    prevClass: 'prev',
+    lastClass: 'last',
+    firstClass: 'first',
+    pageClass: 'page',
+    activeClass: 'active',
+    disabledClass: 'disabled'
+
+    });
+  </script>
 </body>
 </html>
