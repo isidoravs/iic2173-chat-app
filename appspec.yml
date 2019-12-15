@@ -1,9 +1,9 @@
 version: 0.0
 os: linux
-files:
-  - source: ./echo.sh
-    destination: /deploy
-hooks:
-  AfterInstall:
-    - location: after-install.sh
-      timeout: 10
+# files:
+#   - source: ./echo.sh
+#     destination: /deploy
+# hooks:
+#   AfterInstall:
+#     - location: after-install.sh
+#       timeout: 10
