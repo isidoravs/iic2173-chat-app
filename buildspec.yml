@@ -9,7 +9,6 @@ phases:
     commands:
       - echo pre_build steps...
       - aws --version
-      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
   build:
     commands:
       - echo Build started on `date`
