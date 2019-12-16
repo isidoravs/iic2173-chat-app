@@ -16,7 +16,20 @@ IIC2173 - Entrega Final Arquitectura de Sistemas de Software
 
 ### (1) Make my life serverless
 
+
 ### (3) Local NSA
+1. Los __logs__ se encuentran conectados a través del servicio `awslogs`. La configuración de los logs se encuentra en el archivo `/var/awslogs/etc/awslogs.conf`. Actualmente se muestran los de sistema, deploy y de acceso a la aplicación en CloudWatch. En la siguiente imágen se muestran los logs de acceso a la aplicación.
+![alt text](images/access-logs.png "Access Logs")
+Se realizó la configuración siguiendo este [tutorial](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/QuickStartEC2Instance.html)
+
+2. Para instalar __NewRelic__ se generó el archivo `newrelic.ini` en el servidor (ver archivo en __branch__ `server`) que permite hacer la conexión con el __dashboard__. Para asociar la aplicación al archivo de agregó en el archivo `/etc/supervisor/conf.d/` lo siguiente:
+```python
+command=/home/ubuntu/.local/bin/newrelic-admin run-program /home/ubuntu/iic2173-chat-app/venv/bin/gunicorn -k eventlet -w 1 main:app 
+environment=PATH="/home/ubuntu/iic2173-chat-app/venv/bin/",NEW_RELIC_CONFIG_FILE="/home/ubuntu/iic2173-chat-app/newrelic.ini"
+```
+Así siempre al iniciar el servidor se va a montar la aplicación y su estado estará conectado con __New Relic__.
+![alt text](images/newrelic-dashboard.png "New Relic")
+
 
 ### (5) Beyond Travis
 
