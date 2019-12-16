@@ -27,8 +27,8 @@ Pasos a seguir:
 
 ```JSON
 {
-“items”: [“123456”, “789012”],
-“user”: “me”
+"items": ["123456", "789012"],
+"user": "me"
 }
 ```
 
