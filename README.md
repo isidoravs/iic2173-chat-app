@@ -2,7 +2,7 @@
 
 IIC2173 - Entrega Final Arquitectura de Sistemas de Software
 
-## Integrantes
+## Integrantes - 80s Hits
 
 | Nombre               | Número de alumno |
 | -------------------- | ---------------- |
