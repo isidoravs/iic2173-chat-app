@@ -2,6 +2,8 @@
 
 IIC2173 - Entrega Final Arquitectura de Sistemas de Software
 
+15 de diciembre 2019
+
 ## Integrantes - 80s Hits
 
 | Nombre               | Número de alumno |
